@@ -43,10 +43,12 @@ function nacteni_otazky(i) {
     const odpovedi = document.createElement('li');
     odpovedi.id ='odpovedi';
 
-    const fotoOtazka = document.createElement('img');
+    const moznosti = document.createElement('span');
+    moznosti.id ='moznosti';
 
-    fotoOtazka.classList.add('obrazek')
-    fotoOtazka.id = 'foto';
+    const fotoOtazka = document.createElement('img');
+    fotoOtazka.id = 'obrazek';
+    fotoOtazka.classList.add('foto');
     fotoOtazka.src = poleOtazek[i].foto;
 
 
@@ -57,7 +59,8 @@ function nacteni_otazky(i) {
     otazka.appendChild(obsah);
     obsah.appendChild(fotoOtazka);
     obsah.appendChild(fotoOtazka);
-    obsah.appendChild(odpovedi);
+    obsah.appendChild(moznosti);
+    moznosti.appendChild(odpovedi);
 
 
     for (let j = 0; j < poleOtazek[i].odpoved.length; j=j+1 ) {
