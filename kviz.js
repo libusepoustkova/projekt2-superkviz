@@ -23,6 +23,7 @@ const poleOtazek = [{
     spravne: 'Sněhurka'
 }
 ]
+
 const kviz = document.createElement('div');
 
 let pocatek = document.querySelector('body');
@@ -36,7 +37,6 @@ function priNacteni() {
     kviz.classList.add('kviz');
     pocatek.appendChild(kviz);
     nacteni_otazky(0);
-    console.log()
 }
 
 
@@ -67,7 +67,6 @@ function nacteni_otazky(i) {
     fotoOtazka.classList.add('foto');
     fotoOtazka.src = poleOtazek[i].foto;
 
-
     kviz.appendChild(moznosti);
     moznosti.appendChild(poradi);
     moznosti.appendChild(otazka);
@@ -76,29 +75,23 @@ function nacteni_otazky(i) {
     obsah.appendChild(odpovedi);
 
 
-
     for (let j = 0; j < poleOtazek[i].odpoved.length; j=j+1 ) {
         let od_part = document.createElement('li');
         od_part.className ='li';
         od_part.innerHTML = poleOtazek[i].odpoved[j];
         od_part.onclick = function (event) {
-                                            console.log(pole_odpovedi);
-                                        kviz.removeChild(moznosti)
+                                        kviz.removeChild(moznosti);
                                         pole_odpovedi.push(event.target.innerHTML);
-                                        i=i+1
-                                        console.log(i)
+                                        i = i + 1;
                                         if (i < pocetOtazek) {
-
                                                nacteni_otazky(i);
-                                               } else {
+                                               }
+                                        else {
                                                nacteni_vyhodnoceni();
                                                }
                                       }
-        odpovedi.appendChild(od_part)
+        odpovedi.appendChild(od_part);
     }
-}
-
-function vyhodnot_otazku(){
 }
 
 function udelejHTMLodpovedi(ele){
@@ -123,33 +116,30 @@ function nacteni_vyhodnoceni(){
 
      for (let j = 0; j < pocetOtazek; j=j+1 ) {
         const otazka = document.createElement('h3');
-        otazka.id = 'vysledek_odpovedi'
+        otazka.id = 'vysledek_odpovedi';
         otazka.textContent = (j+1) + '. '+ poleOtazek[j].otazka;
 
         const tvoje_odpoved = document.createElement('div');
         tvoje_odpoved.textContent = 'Tvoje odpověď: '+ pole_odpovedi[j];
-        tvoje_odpoved.className = 'vysledek_odpovedi'
+        tvoje_odpoved.className = 'vysledek_odpovedi';
 
         const spravna_odpoved = document.createElement('div');
-        spravna_odpoved.className = 'vysledek_odpovedi'
+        spravna_odpoved.className = 'vysledek_odpovedi';
 
         vysledek.appendChild(otazka);
         vysledek.appendChild(tvoje_odpoved);
-        console.log(pole_odpovedi[j]);
-        console.log(poleOtazek[j].spravne);
 
         if (pole_odpovedi[j] == poleOtazek[j].spravne) {
         spravna_odpoved.textContent = 'To je SPRÁVNĚ.';
-
-        ok = ok + 1}
-        else {
+        ok = ok + 1;
+        } else {
         spravna_odpoved.textContent = 'Správná odpověď: ' + poleOtazek[j].spravne;
         }
         vysledek.appendChild(spravna_odpoved);
      }
 
  const zaver = document.createElement('h2');
- let uspesnost = Math.round(ok/pocetOtazek*100)
- zaver.textContent = 'Správně ' + ok + ' ze ' + pocetOtazek + ' otázek. Úspěšnost ' + uspesnost + ' %.'
- vysledek.appendChild(zaver)
+ let uspesnost = Math.round(ok/pocetOtazek*100);
+ zaver.textContent = 'Správně ' + ok + ' ze ' + pocetOtazek + ' otázek. Úspěšnost ' + uspesnost + ' %.';
+ vysledek.appendChild(zaver);
 }
